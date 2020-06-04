@@ -4,10 +4,23 @@
         <button @click="openDriftWelcomeCallPlaybook">Small Group Classes</button>
         <button @click="openDriftWelcomeCallPlaybook">Private Lessons</button>
         <backbone-modal-harness :modal-view="SubscribeModal" :open="subscribeModalOpen" @close="subscribeModalClosed" />
+
+        <p />
+
+        Products Loading: {{ productsLoading }}
+        <p />
+
+        <div v-if="!productsLoading && basicSubscriptionForCurrentUser">
+            Basic subscription: {{ basicSubscriptionForCurrentUser.amount / 100 }}
+        </div>
+        <p />
+        Lifetime subscription: {{ lifetimeSubscriptionForCurrentUser.amount / 100 }}
     </div>
 </template>
 
 <script>
+  import { mapActions, mapState, mapGetters } from 'vuex'
+
   import SubscribeModal from 'views/core/SubscribeModal'
   import BackboneModalHarness from './common/BackboneModalHarness'
 
@@ -23,6 +36,17 @@
       subscribeModalOpen: false
     }),
 
+    computed: {
+      ...mapState('products', {
+        productsLoading: (s) => s.loading.products,
+      }),
+
+      ...mapGetters('products', [
+        'basicSubscriptionForCurrentUser',
+        'lifetimeSubscriptionForCurrentUser'
+      ])
+    },
+
     methods: {
       openDriftWelcomeCallPlaybook () {
         window.drift.api.startInteraction({ interactionId: 161673 });
@@ -30,11 +54,18 @@
 
       subscribeModalClosed() {
         this.subscribeModalOpen = false
-      }
+      },
+
+      ...mapActions({
+        loadProducts: 'products/loadProducts'
+      })
+    },
+
+    mounted () {
+      this.loadProducts()
     }
   }
 </script>
 
 <style>
-
 </style>
