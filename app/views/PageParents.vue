@@ -8,13 +8,12 @@
         <p />
 
         Products Loading: {{ productsLoading }}
-        <p />
-
         <div v-if="!productsLoading && basicSubscriptionForCurrentUser">
             Basic subscription: {{ basicSubscriptionForCurrentUser.amount / 100 }}
         </div>
-        <p />
-        Lifetime subscription: {{ lifetimeSubscriptionForCurrentUser.amount / 100 }}
+        <div v-if="!productsLoading && lifetimeSubscriptionForCurrentUser">
+            Lifetime subscription: {{ lifetimeSubscriptionForCurrentUser.amount / 100 }}
+        </div>
     </div>
 </template>
 
