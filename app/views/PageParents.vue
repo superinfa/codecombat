@@ -14,6 +14,15 @@
         <div v-if="!productsLoading && lifetimeSubscriptionForCurrentUser">
             Lifetime subscription: {{ lifetimeSubscriptionForCurrentUser.amount / 100 }}
         </div>
+
+        <p />
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/rOXRBQIXvlI?modestBranding=1&rel=0"
+          frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
     </div>
 </template>
 
