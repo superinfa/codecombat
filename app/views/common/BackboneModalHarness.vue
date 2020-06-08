@@ -70,8 +70,10 @@
           return
         }
 
-        this.modalViewInstance.destroy()
+        const viewInstance = this.modalViewInstance
+
         this.cleanupModal()
+        viewInstance.destroy()
       },
 
       cleanupModal () {
